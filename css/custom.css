@@ -1,0 +1,129 @@
+/* 取消首页 banner 的悬浮放大效果（v6 默认已无，这里做兼容保险） */
+#l_cover .cover-bg,
+#l_cover:hover .cover-bg,
+#l_cover .cover-wrapper:hover .cover-bg,
+#l_cover .cover-wrapper:hover .cover-body {
+  transform: none !important;
+}
+
+/* 顶部主题切换按钮 */
+.toggle-mode-btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 暗色模式下把黑色 Logo 反白，避免和深色导航栏糊在一起 */
+:root[color-scheme="dark"] .nav-main img.logo {
+  filter: invert(1) !important;
+}
+
+/* 页脚访客数紧跟在总访问量后面，不单独起一段 */
+.footer .analytics,
+.footer .analytics p {
+  display: inline;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+ * 全站固定背景：封面和子页面共用同一张图
+ * 不直接给 body 设置 background-attachment，避免被封面动画的 transform 影响
+ * ---------------------------------------------------------- */
+body {
+  background: transparent !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: url("https://s2.loli.net/2024/05/18/IHEWOpns2A8QbYo.jpg") center center / cover no-repeat;
+}
+
+:root[color-scheme="dark"] body::before {
+  filter: brightness(0.45);
+}
+
+/* 封面自己的图交给上面的固定层，避免滚动时出现两张图 */
+.cover-wrapper .cover-bg {
+  display: none !important;
+}
+
+/* 站点信息和其它侧栏列表保持同样的行距与左右缩进 */
+.widget.webinfo {
+  padding: 0 !important;
+}
+
+.widget .webinfo {
+  padding: 0 !important;
+}
+
+.widget .webinfo .webinfo-item {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 14px 0 16px !important;
+  line-height: 2;
+}
+
+.widget .webinfo .webinfo-item > div {
+  display: block !important;
+  float: none !important;
+}
+
+/* 卡片稍微透明一点，让固定背景透出来 */
+:root {
+  --color-card: rgba(255, 255, 255, 0.84) !important;
+}
+
+:root[color-scheme="dark"] {
+  --color-card: rgba(27, 37, 43, 0.86) !important;
+}
+
+/* ------------------------------------------------------------
+ * 文章头图 / 缩略图不再悬浮放大
+ * ---------------------------------------------------------- */
+.headimg:hover,
+.headimg-a:hover .headimg,
+.headimg-div:hover .headimg,
+.post .thumbnail:hover,
+.thumbnail:hover {
+  transform: none !important;
+}
+
+/* ------------------------------------------------------------
+ * 搜索栏与当前配色统一
+ * ---------------------------------------------------------- */
+.l_header .m_search .input,
+.l_header .m_search .u-search-input {
+  background: var(--color-block) !important;
+  border: 1px solid var(--color-text-a10) !important;
+  border-radius: 999px !important;
+  color: var(--color-text) !important;
+}
+
+.l_header .m_search .input:focus,
+.l_header .m_search .u-search-input:focus {
+  border-color: var(--color-link) !important;
+  box-shadow: 0 0 0 3px rgba(74, 108, 122, 0.12) !important;
+}
+
+/* 搜索弹窗：跟随配色，而不是主题默认的蓝色 */
+#u-search {
+  --primary-color: #4a6c7a;
+  --border-color: rgba(74, 108, 122, 0.18);
+  --bg-hover: rgba(74, 108, 122, 0.08);
+  --text-secondary: #35657a;
+  --highlight-bg: #f3f1ec;
+  --highlight-color: #a9542f;
+}
+
+:root[color-scheme="dark"] #u-search {
+  --primary-color: #93b7c6;
+  --border-color: rgba(147, 183, 198, 0.2);
+  --bg-hover: rgba(147, 183, 198, 0.12);
+  --text-secondary: #93b7c6;
+  --highlight-bg: rgba(227, 161, 119, 0.18);
+  --highlight-color: #e3a177;
+}
